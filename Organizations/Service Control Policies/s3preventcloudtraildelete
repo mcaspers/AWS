@@ -11,6 +11,9 @@
           "aws:PrincipalArn": [
             "arn:aws:iam::*:root"
           ]
+        },
+        "BoolIfExists": {
+          "aws:MultiFactorAuthPresent": false
         }
       }
     }
