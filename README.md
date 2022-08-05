@@ -18,6 +18,7 @@ This one is pretty self-explanatory. At some point I'll restrict this to the roo
 Another one that is pretty straightforward. This prevents changing a bucket from private to public. Other considerations are:
 - S3 Buckets are [private by default](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html) so post implementation of this SCP it would account for any net new buckets.
 - Any buckets prior to enforcement of the SCP would need some sort of review, whether manually or via a tool like AWS Config, etc.
+- If you have (1) a SSE encrypted S3 Bucket using an AWS-Managed key and (2) the bucket and it's objects are publicly available then anonymous users can decrypt the contents. Something to note with KMS is that AWS-Managed keys _do not_ permit custom key policies to layer in additional access restrictions where Customer-Managed Keys do.
 ### Other Random Thoughts/Cnsideratioons 
 - I haven't looked (yet) into whether net new AWS Accounts can automagically inherit SCPs somehow via configuration or by way of some CloudTrail triggering event to Lambda, etc.
 - [Account Factory](https://docs.aws.amazon.com/controltower/latest/userguide/account-factory.html) is another capability where I haven't lent time yet towards investigating the capabilities to configure/enforce S3 public bucket access policies, etc.
